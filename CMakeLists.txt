@@ -14,7 +14,9 @@ qt_add_executable(appPixelPeek
 qt_add_qml_module(appPixelPeek
     URI PixelPeek
     VERSION 1.0
-    QML_FILES main.qml 
+    QML_FILES
+        main.qml
+        ImageViewer.qml
 )
 
 set_target_properties(appPixelPeek PROPERTIES
