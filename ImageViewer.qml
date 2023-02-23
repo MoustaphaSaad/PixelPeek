@@ -10,10 +10,9 @@ Item {
 
     Flickable {
         anchors.fill: parent
-        contentWidth: image.implicitWidth * pinchArea.scale
-        contentHeight: image.implicitHeight * pinchArea.scale
+        contentWidth: Math.max(image.implicitWidth * pinchArea.scale, width)
+        contentHeight: Math.max(image.implicitHeight * pinchArea.scale, height)
         pixelAligned: true
-        boundsBehavior: Flickable.StopAtBounds
         clip: true
 
         PinchArea {
@@ -28,6 +27,9 @@ Item {
 
             Image {
                 id: image
+                anchors.centerIn: parent
+                fillMode: Image.PreserveAspectFit
+                transformOrigin: Item.Center
                 source: "file:///W:/Projects/rtow/go-image.ppm"
             }
         }
