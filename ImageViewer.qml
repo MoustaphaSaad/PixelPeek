@@ -10,8 +10,20 @@ Item {
 
     Flickable {
         anchors.fill: parent
-        contentWidth: Math.max(image.implicitWidth * pinchArea.scale, width)
-        contentHeight: Math.max(image.implicitHeight * pinchArea.scale, height)
+        contentWidth: {
+            let res = Math.max(image.implicitWidth * pinchArea.scale, width)
+            res += res * 0.80
+            return res
+        }
+        contentHeight: {
+            let res = Math.max(image.implicitHeight * pinchArea.scale, height)
+            res += res * 0.80
+            return res
+        }
+        Component.onCompleted: {
+            contentX = Math.max(image.implicitWidth * pinchArea.scale, width) * 0.40
+            contentY = Math.max(image.implicitHeight * pinchArea.scale, height) * 0.40
+        }
         pixelAligned: true
         clip: true
 
