@@ -8,16 +8,10 @@ Flickable {
         anchors {
             fill: parent
         }
-        //        pinch.target: image
+        pinch.target: image
         pinch.maximumScale: 10
         pinch.minimumScale: 0.1
         pinch.dragAxis: Pinch.XAndYAxis
-        onPinchStarted: function (pinch) {
-            console.log(pinch.scale)
-        }
-        onSmartZoom: function (pinch) {
-            console.log("smart zoom")
-        }
 
         Image {
             id: image
