@@ -5,8 +5,6 @@ Window {
     height: 480
     visible: true
     title: qsTr("Hello World")
-    minimumWidth: 640
-    minimumHeight: 480
 
     ImageViewer {
         anchors {
