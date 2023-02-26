@@ -38,14 +38,6 @@ Rectangle {
                 property real minScale: 0.1
                 property real maxScale: 5
                 property real customScale: 1
-                property real customScaleAcc: 1
-
-                Timer {
-                    id: scaleAccTimer
-                    interval: 100
-                    repeat: false
-                    onTriggered: image.customScaleAcc = 1
-                }
 
                 anchors.fill: parent
                 source: "file:///W:/Projects/rtow/go-image.ppm"
@@ -66,7 +58,7 @@ Rectangle {
             if (wheel.modifiers & Qt.ControlModifier) {
                 console.log("wheel", wheel.angleDelta.y)
                 let newScale = image.customScale
-                newScale *= wheel.angleDelta.y > 0 ? 1 + 0.02 * image.customScaleAcc : 1 - 0.02 * image.customScaleAcc
+                newScale *= wheel.angleDelta.y > 0 ? 1 + 0.05 : 1 - 0.05
                 newScale = clamp(newScale, image.minScale, image.maxScale)
                 if (newScale != image.customScale) {
                     let mousePos = Qt.point(wheel.x, wheel.y)
@@ -86,8 +78,6 @@ Rectangle {
                     imageArea.x = newX
                     imageArea.y = newY
                     image.customScale = newScale
-                    image.customScaleAcc += 0.5
-                    scaleAccTimer.restart()
                 }
                 wheel.accepted = true
             } else {
