@@ -9,6 +9,12 @@ Rectangle {
 
     clip: true
     color: "#EEEEEE"
+    focus: true
+    Keys.onSpacePressed: function (event) {
+        image.customScale = 1
+        imageArea.x = (workArea.width - imageArea.width) / 2
+        imageArea.y = (workArea.height - imageArea.height) / 2
+    }
 
     Rectangle {
         id: imageArea
@@ -45,13 +51,17 @@ Rectangle {
                 source: "file:///W:/Projects/rtow/go-image.ppm"
             }
         }
+    }
 
-        DragHandler {}
+    DragHandler {
+        target: imageArea
+        snapMode: DragHandler.NoSnap
     }
 
     MouseArea {
         anchors.fill: parent
         acceptedButtons: Qt.NoButton
+        propagateComposedEvents: true
         onWheel: function (wheel) {
             if (wheel.modifiers & Qt.ControlModifier) {
                 console.log("wheel", wheel.angleDelta.y)
@@ -84,33 +94,31 @@ Rectangle {
                 wheel.accepted = false
             }
         }
-        propagateComposedEvents: true
     }
 
-    //    Flickable {
-    //        anchors.fill: parent
-    //        contentWidth: Math.max(image.implicitWidth * pinchArea.scale, width)
-    //        contentHeight: Math.max(image.implicitHeight * pinchArea.scale, height)
-    //        pixelAligned: true
-    //        clip: true
+    PinchArea {
+        anchors.fill: parent
+        onPinchUpdated: function (pinch) {
+            let newScale = clamp(pinch.scale, image.minScale, image.maxScale)
+            if (newScale !== image.customScale) {
+                let mousePos = pinch.center
+                let imageAreaPos = mapToItem(imageArea, mousePos)
+                let scaleOrigin = Qt.point(imageArea.width / 2, imageArea.height / 2)
+                if (imageArea.contains(imageAreaPos))
+                    scaleOrigin = imageAreaPos
 
-    //        PinchArea {
-    //            id: pinchArea
-    //            anchors {
-    //                fill: parent
-    //            }
-    //            pinch.target: image
-    //            pinch.maximumScale: 5
-    //            pinch.minimumScale: 0.1
-    //            pinch.dragAxis: Pinch.XAndYAxis
+                let widthScaleFactor = clamp(scaleOrigin.x / imageArea.width, 0, 1)
+                let heightScaleFactor = clamp(scaleOrigin.y / imageArea.height, 0, 1)
 
-    //            Image {
-    //                id: image
-    //                anchors.centerIn: parent
-    //                fillMode: Image.PreserveAspectFit
-    //                transformOrigin: Item.Center
+                let newWidth = image.implicitWidth * newScale + border.width * 2
+                let newHeight = image.implicitHeight * newScale + border.width * 2
+                let newX = imageArea.x + imageArea.width * widthScaleFactor - newWidth * widthScaleFactor
+                let newY = imageArea.y + imageArea.height * heightScaleFactor - newHeight * heightScaleFactor
 
-    //            }
-    //        }
-    //    }
+                imageArea.x = newX
+                imageArea.y = newY
+                image.customScale = newScale
+            }
+        }
+    }
 }
