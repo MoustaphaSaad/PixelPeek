@@ -6,10 +6,21 @@ Window {
     visible: true
     title: qsTr("Hello World")
 
+    Controls {
+        id: header
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: parent.top
+        }
+    }
+
     ImageViewer {
         anchors {
-            fill: parent
-            margins: 20
+            top: header.bottom
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
         }
     }
 }

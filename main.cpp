@@ -1,10 +1,16 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQuickStyle>
 
 
 int main(int argc, char *argv[])
 {
 	QGuiApplication app(argc, argv);
+
+	QQuickStyle::setStyle("Windows");
+	app.setOrganizationName("MoustaphaSaad");
+	app.setOrganizationDomain("moustapha.xyz");
+	app.setApplicationName("PixelPeek");
 
 	QQmlApplicationEngine engine;
 	const QUrl url(u"qrc:/PixelPeek/main.qml"_qs);
