@@ -9,7 +9,7 @@ Rectangle {
     property url source: ""
     property url browseDialogCurrentFolder: ""
     height: 50
-    color: "transparent"
+    color: "#E7ECF0"
 
     Settings {
         property alias lastFileLocation: root.browseDialogCurrentFolder
@@ -36,5 +36,15 @@ Rectangle {
             text: "Browse"
             onClicked: browseDialog.open()
         }
+    }
+
+    Rectangle {
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
+        height: 1
+        color: "#464B52"
     }
 }

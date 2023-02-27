@@ -8,7 +8,6 @@ Rectangle {
     }
 
     clip: true
-    color: "#EEEEEE"
     focus: true
     Keys.onSpacePressed: function (event) {
         image.customScale = 1
@@ -22,7 +21,7 @@ Rectangle {
         height: image.implicitHeight * image.customScale + border.width * 2
         x: (workArea.width - width) / 2
         y: (workArea.height - height) / 2
-        border.color: "#222222"
+        border.color: "#464B52"
         border.width: 1
 
         Image {
