@@ -6,8 +6,12 @@ import Qt.labs.settings
 
 Rectangle {
     id: root
+
     property url source: ""
     property url browseDialogCurrentFolder: ""
+
+    signal loadImage(url path)
+
     height: 50
     color: "#E7ECF0"
 
@@ -51,7 +55,9 @@ Rectangle {
             Layout.fillWidth: true
             enabled: true
             onOpenClicked: browseDialog.open()
-            onLoadImage: console.log("load", url)
+            onLoadImage: function (path) {
+                root.loadImage(path)
+            }
         }
 
         Item {

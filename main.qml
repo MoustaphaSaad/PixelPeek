@@ -13,9 +13,13 @@ Window {
             right: parent.right
             top: parent.top
         }
+        onLoadImage: function (path) {
+            imageViewer.load(path)
+        }
     }
 
     ImageViewer {
+        id: imageViewer
         anchors {
             top: header.bottom
             left: parent.left

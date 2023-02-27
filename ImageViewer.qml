@@ -7,6 +7,10 @@ Rectangle {
         return Math.min(Math.max(value, min), max)
     }
 
+    function load(path) {
+        image.source = path
+    }
+
     clip: true
     focus: true
     Keys.onSpacePressed: function (event) {
@@ -39,7 +43,6 @@ Rectangle {
                 property real customScale: 1
 
                 anchors.fill: parent
-                source: "file:///W:/Projects/rtow/go-image.ppm"
             }
         }
     }
@@ -55,7 +58,6 @@ Rectangle {
         propagateComposedEvents: true
         onWheel: function (wheel) {
             if (wheel.modifiers & Qt.ControlModifier) {
-                console.log("wheel", wheel.angleDelta.y)
                 let newScale = image.customScale
                 newScale *= wheel.angleDelta.y > 0 ? 1 + 0.05 : 1 - 0.05
                 newScale = clamp(newScale, image.minScale, image.maxScale)
