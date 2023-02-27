@@ -7,7 +7,7 @@ Window {
     title: qsTr("Hello World")
 
     AppBar {
-        id: header
+        id: appBar
         anchors {
             left: parent.left
             right: parent.right
@@ -21,10 +21,11 @@ Window {
     ImageViewer {
         id: imageViewer
         anchors {
-            top: header.bottom
+            top: appBar.bottom
             left: parent.left
             right: parent.right
             bottom: parent.bottom
         }
+        smooth: !appBar.nearest
     }
 }

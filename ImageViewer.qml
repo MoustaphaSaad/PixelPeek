@@ -3,6 +3,8 @@ import QtQuick
 Rectangle {
     id: workArea
 
+    property alias smooth: image.smooth
+
     function clamp(value, min, max) {
         return Math.min(Math.max(value, min), max)
     }

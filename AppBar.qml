@@ -9,6 +9,7 @@ Rectangle {
 
     property url source: ""
     property url browseDialogCurrentFolder: ""
+    property alias nearest: nearestButton.checked
 
     signal loadImage(url path)
 
@@ -23,6 +24,7 @@ Rectangle {
         property alias lastFileLocation: root.browseDialogCurrentFolder
         property alias lastSource: root.source
         property alias lastImageUrl: imageUrlBox.url
+        property alias lastNearest: nearestButton.checked
     }
 
     FileDialog {
@@ -42,6 +44,7 @@ Rectangle {
         }
 
         Button {
+            id: nearestButton
             implicitHeight: 25
             checkable: true
             checked: true
