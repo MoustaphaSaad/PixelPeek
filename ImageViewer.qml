@@ -4,13 +4,10 @@ Rectangle {
     id: workArea
 
     property alias smooth: image.smooth
+    property alias source: image.source
 
     function clamp(value, min, max) {
         return Math.min(Math.max(value, min), max)
-    }
-
-    function load(path) {
-        image.source = path
     }
 
     clip: true

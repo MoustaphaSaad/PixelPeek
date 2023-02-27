@@ -14,7 +14,7 @@ Window {
             top: parent.top
         }
         onLoadImage: function (path) {
-            imageViewer.load(path)
+            imageViewer.source = path
         }
     }
 
@@ -26,6 +26,12 @@ Window {
             right: parent.right
             bottom: parent.bottom
         }
+        smooth: !appBar.nearest
+    }
+
+    PopWindow {
+        visible: true
+        source: imageViewer.source
         smooth: !appBar.nearest
     }
 }
