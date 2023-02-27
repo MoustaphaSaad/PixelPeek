@@ -38,6 +38,14 @@ Rectangle {
         }
     }
 
+    ImageUrlBox {
+        anchors {
+            centerIn: parent
+        }
+        enabled: true
+
+    }
+
     Rectangle {
         anchors {
             left: parent.left
