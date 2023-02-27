@@ -1,10 +1,19 @@
 import QtQuick
+import PixelPeek
 
 Window {
     width: 800
     height: 450
     visible: !appBar.pop
     title: qsTr("Hello World")
+
+    ImageWatcher {
+        id: imageWatcher
+        imageUrl: imageViewer.source
+        onImageChanged: function (imageUrl) {
+            console.log("image changed", imageUrl)
+        }
+    }
 
     AppBar {
         id: appBar

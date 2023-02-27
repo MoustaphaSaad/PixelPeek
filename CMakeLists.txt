@@ -9,6 +9,7 @@ find_package(Qt6 6.2 COMPONENTS Quick QuickControls2 REQUIRED)
 
 qt_add_executable(appPixelPeek
     main.cpp
+    ImageWatcher.h
 )
 
 qt_add_qml_module(appPixelPeek
