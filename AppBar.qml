@@ -20,7 +20,7 @@ Rectangle {
         id: browseDialog
         acceptLabel: "Open"
         currentFolder: root.browseDialogCurrentFolder
-        onAccepted: root.source = selectedFile
+        onAccepted: imageUrlBox.load(selectedFile)
         nameFilters: ["Images (*.ppm *.jpg *.jpeg *.png *.bmp)", "All files (*.*)"]
     }
 
@@ -47,8 +47,11 @@ Rectangle {
         }
 
         ImageUrlBox {
+            id: imageUrlBox
             Layout.fillWidth: true
             enabled: true
+            onOpenClicked: browseDialog.open()
+            onLoadImage: console.log("load", url)
         }
 
         Item {
