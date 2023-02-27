@@ -33,5 +33,9 @@ Window {
         visible: appBar.pop
         source: imageViewer.source
         smooth: !appBar.nearest
+        onRestore: {
+            close()
+            appBar.pop = false
+        }
     }
 }

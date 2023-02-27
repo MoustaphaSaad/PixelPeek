@@ -1,10 +1,14 @@
 import QtQuick
+import QtQuick.Controls
 
 Window {
     id: window
 
     property alias source: image.source
     property alias smooth: image.smooth
+    property int resizeTolerance: 12
+
+    signal restore
 
     width: image.implicitWidth
     height: image.implicitHeight
@@ -60,9 +64,9 @@ Window {
         propagateComposedEvents: true
         onPositionChanged: function (p) {
             if (p.buttons & Qt.LeftButton || resizeHandler.active)
-                return;
+                return
 
-            let margins = 12
+            let margins = window.resizeTolerance
 
             let isLeft = p.x < margins
             let isRight = p.x > width - margins
@@ -84,5 +88,16 @@ Window {
             else
                 cursorShape = Qt.ArrowCursor
         }
+    }
+
+    Button {
+        anchors {
+            right: parent.right
+            bottom: parent.bottom
+            margins: window.resizeTolerance
+        }
+
+        icon.source: "qrc:/PixelPeek/icons8-restore.png"
+        onClicked: window.restore()
     }
 }

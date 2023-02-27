@@ -25,6 +25,7 @@ qt_add_qml_module(appPixelPeek
         icons8-folder.svg
         icons8-picture.svg
         icons8-pixel.png
+        icons8-restore.png
 )
 
 set_target_properties(appPixelPeek PROPERTIES
