@@ -12,12 +12,17 @@ Rectangle {
 
     signal loadImage(url path)
 
+    Component.onCompleted: {
+        root.loadImage(imageUrlBox.url)
+    }
+
     height: 50
     color: "#E7ECF0"
 
     Settings {
         property alias lastFileLocation: root.browseDialogCurrentFolder
         property alias lastSource: root.source
+        property alias lastImageUrl: imageUrlBox.url
     }
 
     FileDialog {
