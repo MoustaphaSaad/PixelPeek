@@ -25,25 +25,43 @@ Rectangle {
     }
 
     RowLayout {
-        anchors.fill: parent
-        Label {
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignCenter
-            text: root.source
+        anchors {
+            verticalCenter: parent.verticalCenter
+            left: parent.left
+            right: parent.right
+            margins: 8
         }
 
         Button {
-            text: "Browse"
-            onClicked: browseDialog.open()
+            implicitHeight: 25
+            checkable: true
+            checked: true
+            text: "Nearest"
+            icon.source: "qrc:/PixelPeek/icons8-pixel.png"
+            icon.width: 24
+            icon.height: 24
         }
-    }
 
-    ImageUrlBox {
-        anchors {
-            centerIn: parent
+        Item {
+            Layout.minimumWidth: 100
         }
-        enabled: true
 
+        ImageUrlBox {
+            Layout.fillWidth: true
+            enabled: true
+        }
+
+        Item {
+            Layout.minimumWidth: 100
+        }
+
+        Button {
+            implicitHeight: 25
+            checkable: true
+            checked: true
+            text: "Pop"
+            icon.source: "qrc:/PixelPeek/icons8-picture.svg"
+        }
     }
 
     Rectangle {

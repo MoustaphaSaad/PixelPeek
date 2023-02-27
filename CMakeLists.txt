@@ -19,10 +19,11 @@ qt_add_qml_module(appPixelPeek
         ImageViewer.qml
         AppBar.qml
         ImageUrlBox.qml
-        ImageUrlBoxButton.qml
     RESOURCES
         transparent-tile.png
         icons8-folder.svg
+        icons8-picture.svg
+        icons8-pixel.png
 )
 
 set_target_properties(appPixelPeek PROPERTIES

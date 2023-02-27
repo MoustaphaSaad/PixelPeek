@@ -3,6 +3,9 @@ import QtQuick.Layouts
 import QtQuick.Controls
 
 RowLayout {
+    id: root
+    signal openClicked
+
     TextField {
         Layout.fillWidth: true
         implicitWidth: 300
@@ -16,5 +19,6 @@ RowLayout {
         implicitHeight: 25
         text: "Open"
         icon.source: "qrc:/PixelPeek/icons8-folder.svg"
+        onClicked: root.openClicked()
     }
 }
