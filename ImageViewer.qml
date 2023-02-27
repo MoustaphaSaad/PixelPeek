@@ -10,12 +10,16 @@ Rectangle {
         return Math.min(Math.max(value, min), max)
     }
 
-    clip: true
-    focus: true
-    Keys.onSpacePressed: function (event) {
+    function restore() {
         image.customScale = 1
         imageArea.x = (workArea.width - imageArea.width) / 2
         imageArea.y = (workArea.height - imageArea.height) / 2
+    }
+
+    clip: true
+    focus: true
+    Keys.onSpacePressed: function (event) {
+        workArea.restore()
     }
 
     Rectangle {
@@ -53,8 +57,9 @@ Rectangle {
 
     MouseArea {
         anchors.fill: parent
-        acceptedButtons: Qt.NoButton
+        acceptedButtons: Qt.LeftButton
         propagateComposedEvents: true
+        onDoubleClicked: workArea.restore()
         onWheel: function (wheel) {
             if (wheel.modifiers & Qt.ControlModifier) {
                 let newScale = image.customScale

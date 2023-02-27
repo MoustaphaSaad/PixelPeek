@@ -62,6 +62,13 @@ Window {
         anchors.fill: parent
         hoverEnabled: true
         propagateComposedEvents: true
+        onDoubleClicked: {
+            if (window.visibility === Window.FullScreen)
+                window.showNormal()
+            else
+                window.showFullScreen()
+        }
+
         onPositionChanged: function (p) {
             if (p.buttons & Qt.LeftButton || resizeHandler.active)
                 return

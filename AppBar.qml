@@ -11,7 +11,6 @@ Rectangle {
     property url browseDialogCurrentFolder: ""
     property alias nearest: nearestButton.checked
     property alias pop: popButton.checked
-    onPopChanged: console.log(pop)
 
     signal loadImage(url path)
 
