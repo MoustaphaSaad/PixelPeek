@@ -45,7 +45,11 @@ Window {
                 if (p.y / height > 0.90) {
                     e |= Qt.BottomEdge
                 }
-                window.startSystemResize(e)
+
+                if (e !== 0)
+                    window.startSystemResize(e)
+                else
+                    window.startSystemMove()
             }
         }
     }

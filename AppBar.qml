@@ -10,6 +10,7 @@ Rectangle {
     property url source: ""
     property url browseDialogCurrentFolder: ""
     property alias nearest: nearestButton.checked
+    property alias pop: popButton.checked
 
     signal loadImage(url path)
 
@@ -73,9 +74,10 @@ Rectangle {
         }
 
         Button {
+            id: popButton
             implicitHeight: 25
             checkable: true
-            checked: true
+            checked: false
             text: "Pop"
             icon.source: "qrc:/PixelPeek/icons8-picture.svg"
         }

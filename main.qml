@@ -3,7 +3,7 @@ import QtQuick
 Window {
     width: 800
     height: 450
-    visible: true
+    visible: !appBar.pop
     title: qsTr("Hello World")
 
     AppBar {
@@ -30,7 +30,7 @@ Window {
     }
 
     PopWindow {
-        visible: true
+        visible: appBar.pop
         source: imageViewer.source
         smooth: !appBar.nearest
     }
