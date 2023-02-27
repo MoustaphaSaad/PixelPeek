@@ -6,7 +6,7 @@ Window {
     visible: true
     title: qsTr("Hello World")
 
-    Controls {
+    AppBar {
         id: header
         anchors {
             left: parent.left

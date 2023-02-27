@@ -17,7 +17,7 @@ qt_add_qml_module(appPixelPeek
     QML_FILES
         main.qml
         ImageViewer.qml
-        Controls.qml
+        AppBar.qml
     RESOURCES
         transparent-tile.png
 )
