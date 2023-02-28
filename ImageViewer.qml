@@ -46,6 +46,7 @@ Rectangle {
                 property real customScale: 1
 
                 anchors.fill: parent
+                mipmap: true
             }
         }
     }

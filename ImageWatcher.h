@@ -22,10 +22,15 @@ public:
 	{
 		if (mImageUrl == value)
 			return;
-		removePath(mImageUrl.toLocalFile());
+
+		if (mImageUrl.isEmpty() == false)
+			removePath(mImageUrl.toLocalFile());
+
 		mImageUrl = value;
 		emit imageUrlChanged(mImageUrl);
-		addPath(mImageUrl.toLocalFile());
+
+		if (mImageUrl.isEmpty() == false)
+			addPath(mImageUrl.toLocalFile());
 	}
 
 signals:

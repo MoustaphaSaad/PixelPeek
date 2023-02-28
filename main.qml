@@ -11,6 +11,8 @@ Window {
         id: imageWatcher
         imageUrl: imageViewer.source
         onImageChanged: function (imageUrl) {
+            imageViewer.source = ""
+            imageViewer.source = imageUrl
             console.log("image changed", imageUrl)
         }
     }
