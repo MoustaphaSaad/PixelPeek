@@ -46,8 +46,8 @@ Rectangle {
 
             Image {
                 id: image
-                property real minScale: Math.min(workArea.width, workArea.height) / Math.max(image.implicitWidth, image.implicitHeight) * 0.75
-                property real maxScale: 5
+                property real minScale: 50 / Math.min(image.implicitWidth, image.implicitHeight)
+                property real maxScale: 10
                 property real customScale: 1
 
                 anchors.fill: parent
