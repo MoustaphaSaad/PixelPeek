@@ -1,11 +1,14 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
+#include <QIcon>
 
 
 int main(int argc, char *argv[])
 {
 	QGuiApplication app(argc, argv);
+
+	app.setWindowIcon(QIcon(u":/PixelPeek/icons8-picture-94.png"_qs));
 
 	QQuickStyle::setStyle("Windows");
 	app.setOrganizationName("MoustaphaSaad");

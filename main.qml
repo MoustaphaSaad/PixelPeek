@@ -5,7 +5,7 @@ Window {
     width: 800
     height: 450
     visible: !appBar.pop
-    title: qsTr("Hello World")
+    title: qsTr("PixelPeek")
 
     ImageWatcher {
         id: imageWatcher
