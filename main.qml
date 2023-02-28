@@ -14,6 +14,7 @@ Window {
             imageViewer.source = ""
             imageViewer.source = imageUrl
             console.log("image changed", imageUrl)
+            statusBar.setLoadDatetime(new Date())
         }
     }
 
@@ -26,6 +27,7 @@ Window {
         }
         onLoadImage: function (path) {
             imageViewer.loadImage(path)
+            statusBar.setLoadDatetime(new Date())
         }
     }
 
