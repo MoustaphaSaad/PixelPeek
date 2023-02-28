@@ -21,6 +21,7 @@ qt_add_qml_module(appPixelPeek
         AppBar.qml
         ImageUrlBox.qml
         PopWindow.qml
+        StatusBar.qml
     RESOURCES
         transparent-tile.png
         icons8-folder.svg

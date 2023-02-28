@@ -35,9 +35,18 @@ Window {
             top: appBar.bottom
             left: parent.left
             right: parent.right
-            bottom: parent.bottom
+            bottom: statusBar.top
         }
         smooth: !appBar.nearest
+    }
+
+    StatusBar {
+        id: statusBar
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
     }
 
     PopWindow {
