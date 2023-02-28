@@ -10,8 +10,8 @@ Window {
 
     signal restore
 
-    width: image.implicitWidth
-    height: image.implicitHeight
+    width: Math.min(image.implicitWidth, 320)
+    height: image.implicitHeight * width / image.implicitWidth
     minimumWidth: 100
     minimumHeight: 100
     flags: Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint
@@ -26,6 +26,7 @@ Window {
         id: image
         anchors.fill: parent
         fillMode: Image.PreserveAspectFit
+        mipmap: true
     }
 
     DragHandler {
