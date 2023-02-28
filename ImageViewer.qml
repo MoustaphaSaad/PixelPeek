@@ -16,6 +16,11 @@ Rectangle {
         imageArea.y = (workArea.height - imageArea.height) / 2
     }
 
+    function loadImage(path) {
+        imageViewer.source = path
+        restore()
+    }
+
     clip: true
     focus: true
     Keys.onSpacePressed: function (event) {
@@ -41,7 +46,7 @@ Rectangle {
 
             Image {
                 id: image
-                property real minScale: 0.1
+                property real minScale: Math.min(workArea.width, workArea.height) / Math.max(image.implicitWidth, image.implicitHeight) * 0.75
                 property real maxScale: 5
                 property real customScale: 1
 

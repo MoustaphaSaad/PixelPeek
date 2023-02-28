@@ -25,7 +25,7 @@ Window {
             top: parent.top
         }
         onLoadImage: function (path) {
-            imageViewer.source = path
+            imageViewer.loadImage(path)
         }
     }
 
