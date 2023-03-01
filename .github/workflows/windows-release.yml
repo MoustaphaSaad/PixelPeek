@@ -1,0 +1,44 @@
+name: Windows Release
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+concurrency:
+  group: windows-release
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Qt 6.4.2
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: '6.4.2'
+          modules: 'debug_info'
+          setup-python: 'false'
+      - name: Configure CMake
+        run: cmake . -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON
+      - name: Build App
+        run: cmake --build build --config Release --target appPixelPeek -j
+      - name: Deploy Qt Dependencies
+        run: windeployqt --release ./build/bin/Release/PixelPeek.exe --dir ./build/bin/Release/ --qmldir . --pdb --compiler-runtime --core --gui --qml --quick --widgets --printsupport --no-virtualkeyboard --no-translations --no-opengl-sw --no-system-d3d-compiler
+      - name: "Package Debug Symbols"
+        shell: bash
+        run: 7z a -tzip -r ./PixelPeek-${{github.ref_name}}-${{github.sha}}.zip ./build/bin/Release/*.exe ./build/bin/Release/*.dll
+      - name: Create Release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+          release_name: Release ${{ github.ref_name }}
+          draft: Release ${{ github.ref_name }}
+          prerelease: false
+      - name: Upload Release Artifacts
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            ./PixelPeek-${{github.ref_name}}-${{github.sha}}.zip
