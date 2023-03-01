@@ -20,6 +20,7 @@ find_package(Qt6 6.2 COMPONENTS Quick QuickControls2 REQUIRED)
 qt_add_executable(appPixelPeek
     main.cpp
     ImageWatcher.h
+    Driver.h
 )
 
 qt_add_qml_module(appPixelPeek
@@ -57,3 +58,10 @@ target_link_libraries(appPixelPeek
 install(TARGETS appPixelPeek
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+
+target_include_directories(appPixelPeek
+    PUBLIC
+    ${CMAKE_CURRENT_BINARY_DIR}/include
+)
+
+configure_file(BuildInfo.h.in ${CMAKE_CURRENT_BINARY_DIR}/include/BuildInfo.h)

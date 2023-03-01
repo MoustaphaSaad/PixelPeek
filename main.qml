@@ -8,7 +8,7 @@ Window {
     width: 800
     height: 450
     visible: !appBar.pop
-    title: qsTr("PixelPeek")
+    title: qsTr("PixelPeek - v" + Driver.version)
 
     ImageWatcher {
         id: imageWatcher
