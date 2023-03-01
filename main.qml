@@ -63,5 +63,6 @@ Window {
             close()
             appBar.pop = false
         }
+        loadDatetime: root.loadDatetime
     }
 }

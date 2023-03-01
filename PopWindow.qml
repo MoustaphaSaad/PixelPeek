@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import "Utils.js" as Utils
 
 Window {
     id: window
@@ -7,8 +8,14 @@ Window {
     property alias source: image.source
     property alias smooth: image.smooth
     property int resizeTolerance: 12
+    property var loadDatetime: new Date()
+    onLoadDatetimeChanged: updateLoadedLabel()
 
     signal restore
+
+    function updateLoadedLabel() {
+        lastUpdated.text = Utils.timeDifference(new Date(), loadDatetime)
+    }
 
     width: Math.min(image.implicitWidth, 320)
     height: image.implicitHeight * width / image.implicitWidth
@@ -98,6 +105,13 @@ Window {
         }
     }
 
+    Timer {
+        interval: 1000
+        repeat: true
+        running: true
+        onTriggered: updateLoadedLabel()
+    }
+
     Button {
         anchors {
             right: parent.right
@@ -116,9 +130,16 @@ Window {
             margins: window.resizeTolerance
         }
 
-        color: "black"
-        opacity: 0.40
-        width: 40
-        height: 20
+        color: "#AA000000"
+        width: lastUpdated.implicitWidth + 16
+        height: lastUpdated.implicitHeight + 8
+
+        Text {
+            id: lastUpdated
+            anchors {
+                centerIn: parent
+            }
+            color: "white"
+        }
     }
 }
