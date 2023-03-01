@@ -108,4 +108,17 @@ Window {
         icon.source: "qrc:/PixelPeek/icons8-restore.png"
         onClicked: window.restore()
     }
+
+    Rectangle {
+        anchors {
+            left: parent.left
+            bottom: parent.bottom
+            margins: window.resizeTolerance
+        }
+
+        color: "black"
+        opacity: 0.40
+        width: 40
+        height: 20
+    }
 }

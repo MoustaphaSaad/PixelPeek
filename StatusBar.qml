@@ -3,11 +3,7 @@ import QtQuick.Layouts
 
 Rectangle {
     property var loadDatetime: new Date()
-
-    function setLoadDatetime(time) {
-        loadDatetime = time
-        updateLoadedLabel()
-    }
+    onLoadDatetimeChanged: updateLoadedLabel()
 
     function timeDifference(current, previous) {
         var msPerMinute = 60 * 1000

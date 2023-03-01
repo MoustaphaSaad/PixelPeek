@@ -2,6 +2,9 @@ import QtQuick
 import PixelPeek
 
 Window {
+    id: root
+    property var loadDatetime
+
     width: 800
     height: 450
     visible: !appBar.pop
@@ -14,7 +17,7 @@ Window {
             imageViewer.source = ""
             imageViewer.source = imageUrl
             console.log("image changed", imageUrl)
-            statusBar.setLoadDatetime(new Date())
+            root.loadDatetime = new Date()
         }
     }
 
@@ -27,7 +30,7 @@ Window {
         }
         onLoadImage: function (path) {
             imageViewer.loadImage(path)
-            statusBar.setLoadDatetime(new Date())
+            root.loadDatetime = new Date()
         }
     }
 
@@ -49,6 +52,7 @@ Window {
             right: parent.right
             bottom: parent.bottom
         }
+        loadDatetime: root.loadDatetime
     }
 
     PopWindow {
