@@ -17,9 +17,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 6.2 COMPONENTS Quick QuickControls2 REQUIRED)
 
+configure_file(PixelPeek.rc.in ${CMAKE_CURRENT_BINARY_DIR}/PixelPeek.rc)
+
 set(OS_FILES)
 if (WIN32)
-    set(OS_FILES PixelPeek.rc)
+    set(OS_FILES ${CMAKE_CURRENT_BINARY_DIR}/PixelPeek.rc)
 endif (WIN32)
 
 qt_add_executable(appPixelPeek
@@ -71,3 +73,4 @@ target_include_directories(appPixelPeek
 )
 
 configure_file(BuildInfo.h.in ${CMAKE_CURRENT_BINARY_DIR}/include/BuildInfo.h)
+
