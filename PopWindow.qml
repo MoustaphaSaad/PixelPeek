@@ -26,7 +26,6 @@ Window {
     onVisibilityChanged: {
         window.width = Math.min(image.implicitWidth, 320)
         window.height = image.implicitHeight * window.width / image.implicitWidth
-        console.log("size", window.width, window.height)
     }
 
     Image {
