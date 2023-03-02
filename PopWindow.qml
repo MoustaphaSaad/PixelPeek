@@ -17,11 +17,17 @@ Window {
         lastUpdated.text = Utils.timeDifference(new Date(), loadDatetime)
     }
 
-    width: Math.min(image.implicitWidth, 320)
-    height: image.implicitHeight * width / image.implicitWidth
+    width: 320
+    height: 240
     minimumWidth: 100
     minimumHeight: 100
     flags: Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint
+
+    onVisibilityChanged: {
+        window.width = Math.min(image.implicitWidth, 320)
+        window.height = image.implicitHeight * window.width / image.implicitWidth
+        console.log("size", window.width, window.height)
+    }
 
     Image {
         anchors.fill: parent

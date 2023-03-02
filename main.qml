@@ -32,6 +32,12 @@ Window {
             imageViewer.loadImage(path)
             root.loadDatetime = new Date()
         }
+        onPopChanged: {
+            if (pop)
+                popWindow.show()
+            else
+                popWindow.hide()
+        }
     }
 
     ImageViewer {
@@ -56,12 +62,13 @@ Window {
     }
 
     PopWindow {
-        visible: appBar.pop
+        id: popWindow
+        visible: false
         source: imageViewer.source
         smooth: !appBar.nearest
         onRestore: {
-            close()
             appBar.pop = false
+            hide()
         }
         loadDatetime: root.loadDatetime
     }
