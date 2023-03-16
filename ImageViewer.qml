@@ -52,6 +52,7 @@ Rectangle {
 
                 anchors.fill: parent
                 mipmap: true
+                cache: false
             }
         }
     }

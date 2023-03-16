@@ -39,6 +39,7 @@ Window {
         anchors.fill: parent
         fillMode: Image.PreserveAspectFit
         mipmap: true
+        cache: false
     }
 
     DragHandler {

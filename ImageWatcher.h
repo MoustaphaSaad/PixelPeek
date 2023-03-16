@@ -5,6 +5,10 @@
 #include <QFile>
 #include <qqml.h>
 
+#ifdef Q_OS_WIN
+#include <windows.h>
+#endif
+
 class ImageWatcher: public QFileSystemWatcher
 {
 	Q_OBJECT
@@ -43,7 +47,25 @@ private slots:
 		if (files().contains(path) == false)
 			if (QFile::exists(path))
 				addPath(path);
-		emit imageChanged(QUrl::fromLocalFile(path));
+
+		bool exclusive = true;
+#ifdef Q_OS_WIN
+		auto h = CreateFileW(
+			(LPCWSTR)path.utf16(),
+			GENERIC_READ,
+			0,
+			NULL,
+			OPEN_EXISTING,
+			FILE_ATTRIBUTE_NORMAL,
+			NULL
+		);
+		if (h == INVALID_HANDLE_VALUE)
+			exclusive = false;
+		else
+			CloseHandle(h);
+#endif
+		if (exclusive)
+			emit imageChanged(QUrl::fromLocalFile(path));
 	}
 
 private:
