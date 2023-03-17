@@ -23,9 +23,11 @@ Window {
     minimumHeight: 100
     flags: Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint
 
-    onVisibilityChanged: {
-        window.width = Math.min(image.implicitWidth, 320)
-        window.height = image.implicitHeight * window.width / image.implicitWidth
+    onVisibilityChanged: function (visibility) {
+        if (visibility !== Window.FullScreen) {
+            window.width = Math.min(image.implicitWidth, 320)
+            window.height = image.implicitHeight * window.width / image.implicitWidth
+        }
     }
 
     Image {

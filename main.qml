@@ -67,6 +67,7 @@ Window {
         source: imageViewer.source
         smooth: !appBar.nearest
         onRestore: {
+            imageViewer.restore()
             appBar.pop = false
             hide()
         }
