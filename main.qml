@@ -11,12 +11,12 @@ Window {
     title: qsTr("PixelPeek - v" + Driver.version)
 
     Connections {
-        target: Driver.watcher
+        target: Driver
 
-        function onImageChanged(imageUrl) {
+        function onReloadImage() {
             imageViewer.source = ""
-            imageViewer.source = imageUrl
-            console.log("image changed", imageUrl)
+            imageViewer.source = "image://history/latest"
+            console.log("image changed", Driver.watcher.imageUrl)
             root.loadDatetime = new Date()
         }
     }
@@ -29,7 +29,8 @@ Window {
             top: parent.top
         }
         onLoadImage: function (path) {
-            imageViewer.loadImage(path)
+            Driver.watcher.imageUrl = path
+            imageViewer.restore()
             root.loadDatetime = new Date()
         }
         onPopChanged: {
@@ -49,7 +50,6 @@ Window {
             bottom: statusBar.top
         }
         smooth: !appBar.nearest
-        onSourceChanged: Driver.watcher.imageUrl = source
     }
 
     StatusBar {

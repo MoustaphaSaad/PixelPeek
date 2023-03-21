@@ -28,6 +28,9 @@ qt_add_executable(appPixelPeek
     main.cpp
     ImageWatcher.h
     Driver.h
+    Driver.cpp
+    ImageProvider.h
+    ImageProvider.cpp
     ${OS_FILES}
 )
 

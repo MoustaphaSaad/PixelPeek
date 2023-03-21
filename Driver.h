@@ -2,6 +2,8 @@
 
 #include <QObject>
 #include <QString>
+#include <QVector>
+#include <QImage>
 #include <qqml.h>
 
 #include "BuildInfo.h"
@@ -15,14 +17,23 @@ class Driver: public QObject
 	QML_ELEMENT
 	QML_SINGLETON
 public:
-	Driver(QObject* parent = nullptr)
-		: QObject(parent)
-	{
-		mWatcher = new ImageWatcher{this};
-	}
+	static Driver* singleton();
+	static Driver* create(QQmlEngine *qmlEngine, QJSEngine *jsEngine);
 
 	QString version() const { return VERSION; }
 	ImageWatcher* watcher() const { return mWatcher; }
+
+	QImage latestImage() const;
+signals:
+	void reloadImage();
+
+private slots:
+	void handleImageChanged(const QUrl& imageUrl);
+	void handleImageUrlChanged(const QUrl& imageUrl);
+
 private:
+	Driver(QObject* parent = nullptr);
+
 	ImageWatcher* mWatcher = nullptr;
+	QVector<QImage> mHistory;
 };

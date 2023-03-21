@@ -16,11 +16,6 @@ Rectangle {
         imageArea.y = (workArea.height - imageArea.height) / 2
     }
 
-    function loadImage(path) {
-        imageViewer.source = path
-        restore()
-    }
-
     clip: true
     focus: true
     Keys.onSpacePressed: function (event) {
