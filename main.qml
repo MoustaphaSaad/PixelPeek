@@ -10,10 +10,10 @@ Window {
     visible: !appBar.pop
     title: qsTr("PixelPeek - v" + Driver.version)
 
-    ImageWatcher {
-        id: imageWatcher
-        imageUrl: imageViewer.source
-        onImageChanged: function (imageUrl) {
+    Connections {
+        target: Driver.watcher
+
+        function onImageChanged(imageUrl) {
             imageViewer.source = ""
             imageViewer.source = imageUrl
             console.log("image changed", imageUrl)
@@ -49,6 +49,7 @@ Window {
             bottom: statusBar.top
         }
         smooth: !appBar.nearest
+        onSourceChanged: Driver.watcher.imageUrl = source
     }
 
     StatusBar {
