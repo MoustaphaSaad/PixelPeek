@@ -15,7 +15,7 @@ Window {
 
         function onReloadImage() {
             imageViewer.source = ""
-            imageViewer.source = "image://history/latest"
+            imageViewer.source = `image://history/${Driver.historyImageCount}`
             console.log("image changed", Driver.watcher.imageUrl)
             root.loadDatetime = new Date()
         }

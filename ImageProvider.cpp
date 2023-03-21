@@ -8,7 +8,12 @@ ImageProvider::ImageProvider(Driver* driver)
 
 QImage ImageProvider::requestImage(const QString &id, QSize *size, const QSize &requestedSize)
 {
-	auto res = mDriver->latestImage();
+	bool ok = false;
+	int historyIndex = id.toInt(&ok);
+	if (ok == false)
+		historyIndex = mDriver->historyImageCount();
+
+	auto res = mDriver->getImage(historyIndex - 1);
 
 	if (size)
 		*size = QSize(res.width(), res.height());

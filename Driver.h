@@ -14,6 +14,7 @@ class Driver: public QObject
 	Q_OBJECT
 	Q_PROPERTY(QString version READ version CONSTANT)
 	Q_PROPERTY(ImageWatcher* watcher READ watcher CONSTANT)
+	Q_PROPERTY(int historyImageCount READ historyImageCount NOTIFY historyImageCountChanged)
 	QML_ELEMENT
 	QML_SINGLETON
 public:
@@ -22,10 +23,12 @@ public:
 
 	QString version() const { return VERSION; }
 	ImageWatcher* watcher() const { return mWatcher; }
+	int historyImageCount() const { return mHistory.size(); }
 
-	QImage latestImage() const;
+	QImage getImage(int index) const;
 signals:
 	void reloadImage();
+	void historyImageCountChanged(int historyImageCount);
 
 private slots:
 	void handleImageChanged(const QUrl& imageUrl);

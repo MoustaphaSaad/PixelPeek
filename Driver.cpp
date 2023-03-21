@@ -23,10 +23,10 @@ Driver* Driver::create(QQmlEngine*, QJSEngine*)
 	return res;
 }
 
-QImage Driver::latestImage() const
+QImage Driver::getImage(int index) const
 {
-	if (mHistory.size() > 0)
-		return mHistory.back();
+	if (mHistory.size() > index)
+		return mHistory[index];
 	else
 		return QImage{};
 }
@@ -37,6 +37,7 @@ void Driver::handleImageChanged(const QUrl& imageUrl)
 	if (img.load(imageUrl.toLocalFile()) == false)
 		qWarning() << "failed to load image" << imageUrl;
 	mHistory.push_back(img);
+	emit historyImageCountChanged(historyImageCount());
 	emit reloadImage();
 }
 
