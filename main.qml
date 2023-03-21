@@ -1,9 +1,17 @@
 import QtQuick
+import QtQuick.Controls
 import PixelPeek
 
 Window {
     id: root
     property var loadDatetime
+
+    function reloadImage() {
+        imageViewer.source = ""
+        imageViewer.source = `image://history/${historySlider.value}`
+        console.log("image changed", Driver.watcher.imageUrl)
+        root.loadDatetime = new Date()
+    }
 
     width: 800
     height: 450
@@ -14,10 +22,12 @@ Window {
         target: Driver
 
         function onReloadImage() {
-            imageViewer.source = ""
-            imageViewer.source = `image://history/${Driver.historyImageCount}`
-            console.log("image changed", Driver.watcher.imageUrl)
-            root.loadDatetime = new Date()
+            root.reloadImage()
+        }
+
+        function onHistoryImageCountChanged(historyImageCount) {
+            console.log(`history image count ${historyImageCount}`)
+            historySlider.value = historyImageCount
         }
     }
 
@@ -60,6 +70,18 @@ Window {
             bottom: parent.bottom
         }
         loadDatetime: root.loadDatetime
+
+        Slider {
+            id: historySlider
+            anchors {
+                right: parent.right
+                verticalCenter: parent.verticalCenter
+                rightMargin: 10
+            }
+            from: 1
+            to: Driver.historyImageCount
+            onValueChanged: root.reloadImage()
+        }
     }
 
     PopWindow {
