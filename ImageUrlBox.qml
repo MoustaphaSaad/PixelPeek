@@ -27,7 +27,7 @@ RowLayout {
     Button {
         implicitHeight: 25
         text: "Open"
-        icon.source: "qrc:/PixelPeek/icons8-folder.svg"
+        icon.source: "qrc:/qt/qml/PixelPeek/icons8-folder.svg"
         onClicked: root.openClicked()
     }
 }

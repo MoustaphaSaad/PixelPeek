@@ -33,7 +33,7 @@ Window {
     Image {
         anchors.fill: parent
         fillMode: Image.Tile
-        source: "qrc:/PixelPeek/transparent-tile.png"
+        source: "qrc:/qt/qml/PixelPeek/transparent-tile.png"
     }
 
     Image {
@@ -127,7 +127,7 @@ Window {
             margins: window.resizeTolerance
         }
 
-        icon.source: "qrc:/PixelPeek/icons8-restore.png"
+        icon.source: "qrc:/qt/qml/PixelPeek/icons8-restore.png"
         onClicked: window.restore()
     }
 

@@ -38,7 +38,7 @@ Rectangle {
 
         Image {
             fillMode: Image.Tile
-            source: "qrc:/PixelPeek/transparent-tile.png"
+            source: "qrc:/qt/qml/PixelPeek/transparent-tile.png"
             anchors {
                 fill: parent
                 margins: parent.border.width

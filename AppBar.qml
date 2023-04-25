@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Dialogs
-import Qt.labs.settings
+import QtCore
 
 Rectangle {
     id: root
@@ -50,7 +50,7 @@ Rectangle {
             checkable: true
             checked: true
             text: "Nearest"
-            icon.source: "qrc:/PixelPeek/icons8-pixel.png"
+            icon.source: "qrc:/qt/qml/PixelPeek/icons8-pixel.png"
             icon.width: 24
             icon.height: 24
         }
@@ -79,7 +79,7 @@ Rectangle {
             checkable: true
             checked: false
             text: "Pop"
-            icon.source: "qrc:/PixelPeek/icons8-picture.svg"
+            icon.source: "qrc:/qt/qml/PixelPeek/icons8-picture.svg"
         }
     }
 

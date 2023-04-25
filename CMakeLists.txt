@@ -15,7 +15,9 @@ set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 6.2 COMPONENTS Quick QuickControls2 REQUIRED)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Quick QuickControls2)
+
+qt_standard_project_setup(REQUIRES 6.5)
 
 configure_file(PixelPeek.rc.in ${CMAKE_CURRENT_BINARY_DIR}/PixelPeek.rc)
 
@@ -35,7 +37,7 @@ qt_add_qml_module(appPixelPeek
     URI PixelPeek
     VERSION 1.0
     QML_FILES
-        main.qml
+        Main.qml
         ImageViewer.qml
         AppBar.qml
         ImageUrlBox.qml
