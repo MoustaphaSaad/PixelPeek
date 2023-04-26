@@ -5,19 +5,27 @@ Window {
     id: root
     property var loadDatetime
 
+    function reloadImage() {
+        imageViewer.source = ""
+        imageViewer.source = `image://history/${Driver.historyImageCount - 1}`
+        console.log("image changed", Driver.watcher.imageUrl)
+        root.loadDatetime = new Date()
+    }
+
     width: 800
     height: 450
     visible: !appBar.pop
     title: qsTr("PixelPeek - v" + Driver.version)
 
-    ImageWatcher {
-        id: imageWatcher
-        imageUrl: imageViewer.source
-        onImageChanged: function (imageUrl) {
-            imageViewer.source = ""
-            imageViewer.source = imageUrl
-            console.log("image changed", imageUrl)
-            root.loadDatetime = new Date()
+    Connections {
+        target: Driver
+
+        function onReloadImage() {
+            root.reloadImage()
+        }
+
+        function onHistoryImageCountChanged(historyImageCount) {
+            console.log(`history image count ${historyImageCount}`)
         }
     }
 
@@ -29,7 +37,8 @@ Window {
             top: parent.top
         }
         onLoadImage: function (path) {
-            imageViewer.loadImage(path)
+            Driver.watcher.imageUrl = path
+            imageViewer.restore()
             root.loadDatetime = new Date()
         }
         onPopChanged: {

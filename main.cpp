@@ -3,6 +3,8 @@
 #include <QQuickStyle>
 #include <QIcon>
 
+#include "Driver.h"
+#include "ImageProvider.h"
 
 int main(int argc, char *argv[])
 {
@@ -16,6 +18,7 @@ int main(int argc, char *argv[])
 	app.setApplicationName("PixelPeek");
 
 	QQmlApplicationEngine engine;
+	engine.addImageProvider("history", new ImageProvider{Driver::singleton()});
 	QObject::connect(&engine, &QQmlApplicationEngine::objectCreationFailed,
 					 &app, []() { QCoreApplication::exit(-1); },
 	Qt::QueuedConnection);
