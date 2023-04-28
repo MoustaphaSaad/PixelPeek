@@ -89,6 +89,18 @@ Window {
                     width: ListView.view.width
                     height: 60
                     color: "blue"
+
+                    Image {
+                        anchors {
+                            horizontalCenter: parent.horizontalCenter
+                            top: parent.top
+                            bottom: parent.bottom
+                            margins: 4
+                        }
+
+                        fillMode: Image.PreserveAspectFit
+                        source: `image://history/${index}`
+                    }
                 }
             }
         }
