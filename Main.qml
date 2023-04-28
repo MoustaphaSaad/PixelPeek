@@ -77,10 +77,20 @@ Window {
             smooth: !appBar.nearest
         }
 
-        Rectangle {
+        Item {
             SplitView.fillHeight: true
             SplitView.minimumWidth: 250
-            color: "red"
+            clip: true
+            ListView {
+                anchors.fill: parent
+                model: Driver.historyImageCount
+                spacing: 4
+                delegate: Rectangle {
+                    width: ListView.view.width
+                    height: 60
+                    color: "blue"
+                }
+            }
         }
     }
 
