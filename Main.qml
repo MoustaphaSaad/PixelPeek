@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Controls
 import PixelPeek
 
 Window {
@@ -49,15 +50,38 @@ Window {
         }
     }
 
-    ImageViewer {
-        id: imageViewer
+    SplitView {
         anchors {
             top: appBar.bottom
             left: parent.left
             right: parent.right
             bottom: statusBar.top
         }
-        smooth: !appBar.nearest
+
+        Component.onCompleted: imageViewerRestoreTimer.start()
+
+        // I have no idea why the splitview addition breaks the initialization of image to be
+        // centered in the work area, but this timer "waits" for the anchors and layouts to be
+        // "stable" then it triggers a restore to center the image to the work area
+        Timer {
+            id: imageViewerRestoreTimer
+            interval: 100
+            repeat: false
+            onTriggered: imageViewer.restore()
+        }
+
+        ImageViewer {
+            id: imageViewer
+            SplitView.fillWidth: true
+            SplitView.fillHeight: true
+            smooth: !appBar.nearest
+        }
+
+        Rectangle {
+            SplitView.fillHeight: true
+            SplitView.minimumWidth: 250
+            color: "red"
+        }
     }
 
     StatusBar {
