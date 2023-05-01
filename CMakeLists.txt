@@ -46,6 +46,7 @@ qt_add_qml_module(appPixelPeek
         ImageUrlBox.qml
         PopWindow.qml
         StatusBar.qml
+        HistoryViewer.qml
         Utils.js
     RESOURCES
         transparent-tile.png

@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Layouts
 import PixelPeek
 
 Window {
@@ -77,32 +78,10 @@ Window {
             smooth: !appBar.nearest
         }
 
-        Item {
+        HistoryViewer {
             SplitView.fillHeight: true
             SplitView.minimumWidth: 250
             clip: true
-            ListView {
-                anchors.fill: parent
-                model: Driver.historyImageCount
-                spacing: 4
-                delegate: Rectangle {
-                    width: ListView.view.width
-                    height: 60
-                    color: "blue"
-
-                    Image {
-                        anchors {
-                            horizontalCenter: parent.horizontalCenter
-                            top: parent.top
-                            bottom: parent.bottom
-                            margins: 4
-                        }
-
-                        fillMode: Image.PreserveAspectFit
-                        source: `image://history/${index}`
-                    }
-                }
-            }
         }
     }
 
