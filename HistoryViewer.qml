@@ -24,10 +24,21 @@ ListView {
                 source: `image://history/${index}`
             }
 
-            Rectangle {
-                Layout.fillHeight: true
+            ColumnLayout {
+                Layout.fillHeight: false
                 Layout.fillWidth: true
-                color: "blue"
+                Text {
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
+                    text: `Image #${index}`
+                }
+                Text {
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
+                    text: "5 hours ago"
+                }
+            }
+
+            Item {
+                Layout.fillWidth: true
             }
         }
     }
