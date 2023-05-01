@@ -8,6 +8,7 @@
 
 #include "BuildInfo.h"
 #include "ImageWatcher.h"
+#include "HistoryImage.h"
 
 class Driver: public QObject
 {
@@ -38,5 +39,5 @@ private:
 	Driver(QObject* parent = nullptr);
 
 	ImageWatcher* mWatcher = nullptr;
-	QVector<QImage> mHistory;
+	QVector<HistoryImage*> mHistory;
 };

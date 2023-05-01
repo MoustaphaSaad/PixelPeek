@@ -33,6 +33,7 @@ qt_add_executable(appPixelPeek
     Driver.cpp
     ImageProvider.h
     ImageProvider.cpp
+    HistoryImage.h
     ${OS_FILES}
 )
 

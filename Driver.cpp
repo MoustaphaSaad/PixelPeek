@@ -26,7 +26,7 @@ Driver* Driver::create(QQmlEngine*, QJSEngine*)
 QImage Driver::getImage(int index) const
 {
 	if (mHistory.size() > index)
-		return mHistory[index];
+		return mHistory[index]->image();
 	else
 		return QImage{};
 }
@@ -36,7 +36,10 @@ void Driver::handleImageChanged(const QUrl& imageUrl)
 	QImage img;
 	if (img.load(imageUrl.toLocalFile()) == false)
 		qWarning() << "failed to load image" << imageUrl;
-	mHistory.push_back(img);
+	auto historyImage = new HistoryImage{this};
+	historyImage->setImage(img);
+	historyImage->setTimestamp(QDateTime::currentDateTime());
+	mHistory.push_back(historyImage);
 	emit historyImageCountChanged(historyImageCount());
 	emit reloadImage();
 }
