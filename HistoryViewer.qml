@@ -1,10 +1,11 @@
 import QtQuick
 import QtQuick.Layouts
 import PixelPeek
+import "Utils.js" as Utils
 
 ListView {
-    model: Driver.historyImageCount
-    spacing: 4
+    model: Driver.historyImageList
+    spacing: 2
     delegate: Rectangle {
         width: ListView.view.width
         height: 60
@@ -29,11 +30,18 @@ ListView {
                 Layout.fillWidth: true
                 Text {
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
-                    text: `Image #${index}`
+                    text: name
                 }
                 Text {
+                    id: timestampText
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
-                    text: "5 hours ago"
+                    text: Utils.timeDifference(new Date(), timestamp)
+                }
+                Timer {
+                    interval: 1000
+                    repeat: true
+                    running: true
+                    onTriggered: timestampText.text = Utils.timeDifference(new Date(), timestamp)
                 }
             }
 
