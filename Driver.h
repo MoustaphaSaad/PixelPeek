@@ -9,6 +9,7 @@
 #include "BuildInfo.h"
 #include "ImageWatcher.h"
 #include "HistoryImage.h"
+#include "HistoryImageList.h"
 
 class Driver: public QObject
 {
@@ -16,6 +17,7 @@ class Driver: public QObject
 	Q_PROPERTY(QString version READ version CONSTANT)
 	Q_PROPERTY(ImageWatcher* watcher READ watcher CONSTANT)
 	Q_PROPERTY(int historyImageCount READ historyImageCount NOTIFY historyImageCountChanged)
+	Q_PROPERTY(HistoryImageList* historyImageList READ historyImageList CONSTANT)
 	QML_ELEMENT
 	QML_SINGLETON
 public:
@@ -25,6 +27,7 @@ public:
 	QString version() const { return VERSION; }
 	ImageWatcher* watcher() const { return mWatcher; }
 	int historyImageCount() const { return mHistory.size(); }
+	HistoryImageList* historyImageList() const { return mHistoryImageList; }
 
 	QImage getImage(int index) const;
 signals:
@@ -39,5 +42,7 @@ private:
 	Driver(QObject* parent = nullptr);
 
 	ImageWatcher* mWatcher = nullptr;
+
+	HistoryImageList* mHistoryImageList = nullptr;
 	QVector<HistoryImage*> mHistory;
 };

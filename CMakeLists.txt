@@ -23,60 +23,62 @@ configure_file(PixelPeek.rc.in ${CMAKE_CURRENT_BINARY_DIR}/PixelPeek.rc)
 
 set(OS_FILES)
 if (WIN32)
-    set(OS_FILES ${CMAKE_CURRENT_BINARY_DIR}/PixelPeek.rc)
+	set(OS_FILES ${CMAKE_CURRENT_BINARY_DIR}/PixelPeek.rc)
 endif (WIN32)
 
 qt_add_executable(appPixelPeek
-    main.cpp
-    ImageWatcher.h
-    Driver.h
-    Driver.cpp
-    ImageProvider.h
-    ImageProvider.cpp
-    HistoryImage.h
-    ${OS_FILES}
+	main.cpp
+	ImageWatcher.h
+	Driver.h
+	Driver.cpp
+	ImageProvider.h
+	ImageProvider.cpp
+	HistoryImage.h
+	HistoryImageList.h
+	HistoryImageList.cpp
+	${OS_FILES}
 )
 
 qt_add_qml_module(appPixelPeek
-    URI PixelPeek
-    VERSION 1.0
-    QML_FILES
-        Main.qml
-        ImageViewer.qml
-        AppBar.qml
-        ImageUrlBox.qml
-        PopWindow.qml
-        StatusBar.qml
-        HistoryViewer.qml
-        Utils.js
-    RESOURCES
-        transparent-tile.png
-        icons8-folder.svg
-        icons8-picture.svg
-        icons8-pixel.png
-        icons8-restore.png
-        icons8-picture-94.png
+	URI PixelPeek
+	VERSION 1.0
+	QML_FILES
+		Main.qml
+		ImageViewer.qml
+		AppBar.qml
+		ImageUrlBox.qml
+		PopWindow.qml
+		StatusBar.qml
+		HistoryViewer.qml
+		Utils.js
+	RESOURCES
+		transparent-tile.png
+		icons8-folder.svg
+		icons8-picture.svg
+		icons8-pixel.png
+		icons8-restore.png
+		icons8-picture-94.png
 )
 
 set_target_properties(appPixelPeek PROPERTIES
-    MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
-    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-    MACOSX_BUNDLE TRUE
-    WIN32_EXECUTABLE TRUE
-    OUTPUT_NAME "PixelPeek"
+	MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
+	MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+	MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+	MACOSX_BUNDLE TRUE
+	WIN32_EXECUTABLE TRUE
+	OUTPUT_NAME "PixelPeek"
 )
 
 target_link_libraries(appPixelPeek
-    PRIVATE Qt6::Quick Qt6::QuickControls2)
+	PRIVATE Qt6::Quick Qt6::QuickControls2)
 
 install(TARGETS appPixelPeek
-    BUNDLE DESTINATION .
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+	BUNDLE DESTINATION .
+	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 target_include_directories(appPixelPeek
-    PUBLIC
-    ${CMAKE_CURRENT_BINARY_DIR}/include
+	PUBLIC
+	${CMAKE_CURRENT_BINARY_DIR}/include
 )
 
 configure_file(BuildInfo.h.in ${CMAKE_CURRENT_BINARY_DIR}/include/BuildInfo.h)

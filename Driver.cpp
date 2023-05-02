@@ -5,6 +5,8 @@
 Driver::Driver(QObject* parent)
 	: QObject(parent)
 {
+	mHistoryImageList = new HistoryImageList{this};
+
 	mWatcher = new ImageWatcher{this};
 	connect(mWatcher, &ImageWatcher::imageChanged, this, &Driver::handleImageChanged);
 	connect(mWatcher, &ImageWatcher::imageUrlChanged, this, &Driver::handleImageUrlChanged);
@@ -40,6 +42,7 @@ void Driver::handleImageChanged(const QUrl& imageUrl)
 	historyImage->setImage(img);
 	historyImage->setTimestamp(QDateTime::currentDateTime());
 	mHistory.push_back(historyImage);
+	mHistoryImageList->addImage(historyImage);
 	emit historyImageCountChanged(historyImageCount());
 	emit reloadImage();
 }
@@ -47,5 +50,6 @@ void Driver::handleImageChanged(const QUrl& imageUrl)
 void Driver::handleImageUrlChanged(const QUrl& imageUrl)
 {
 	mHistory.clear();
+	mHistoryImageList->clearImages();
 	handleImageChanged(imageUrl);
 }
