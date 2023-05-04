@@ -42,13 +42,19 @@ Window {
         }
         onPopChanged: {
             if (pop)
+            {
                 popWindow.show()
+                popWindow.requestFocus()
+            }
             else
+            {
                 popWindow.hide()
+            }
         }
     }
 
     SplitView {
+        id: splitArea
         anchors {
             top: appBar.bottom
             left: parent.left
@@ -56,7 +62,20 @@ Window {
             bottom: statusBar.top
         }
 
+        focus: true
         Component.onCompleted: imageViewerRestoreTimer.start()
+        Keys.onPressed: function(event) {
+            if (event.key == Qt.Key_Left || event.key == Qt.Key_Up)
+            {
+                if (Driver.historyImageList.selectedImageIndex > 0)
+                    Driver.historyImageList.selectedImageIndex--
+            }
+            else if (event.key == Qt.Key_Right || event.key == Qt.Key_Down)
+            {
+                if (Driver.historyImageList.selectedImageIndex + 1 < Driver.historyImageCount)
+                    Driver.historyImageList.selectedImageIndex++
+            }
+        }
 
         // I have no idea why the splitview addition breaks the initialization of image to be
         // centered in the work area, but this timer "waits" for the anchors and layouts to be
@@ -102,6 +121,7 @@ Window {
             imageViewer.restore()
             appBar.pop = false
             hide()
+            splitArea.focus = true
         }
         selectedImageIndex: Driver.historyImageList.selectedImageIndex
         loadDatetime: Driver.historyImageList.selectedImage.timestamp

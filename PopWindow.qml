@@ -19,6 +19,10 @@ Window {
         lastUpdated.text = Utils.timeDifference(new Date(), loadDatetime)
     }
 
+    function requestFocus() {
+        imageBackground.focus = true
+    }
+
     width: 320
     height: 240
     minimumWidth: 100
@@ -33,9 +37,23 @@ Window {
     }
 
     Image {
+        id: imageBackground
         anchors.fill: parent
         fillMode: Image.Tile
         source: "qrc:/qt/qml/PixelPeek/transparent-tile.png"
+        focus: true
+        Keys.onPressed: function(event) {
+            if (event.key == Qt.Key_Left || event.key == Qt.Key_Up)
+            {
+                if (Driver.historyImageList.selectedImageIndex > 0)
+                    Driver.historyImageList.selectedImageIndex--
+            }
+            else if (event.key == Qt.Key_Right || event.key == Qt.Key_Down)
+            {
+                if (Driver.historyImageList.selectedImageIndex + 1 < Driver.historyImageCount)
+                    Driver.historyImageList.selectedImageIndex++
+            }
+        }
     }
 
     Image {
