@@ -8,7 +8,7 @@ Window {
 
     function reloadImage() {
         imageViewer.source = ""
-        imageViewer.source = `image://history/${Driver.historyImageCount - 1}`
+        imageViewer.source = `image://history/${Driver.historyImageList.selectedImageIndex}`
         console.log("image changed", Driver.watcher.imageUrl)
     }
 

@@ -6,6 +6,7 @@ Driver::Driver(QObject* parent)
 	: QObject(parent)
 {
 	mHistoryImageList = new HistoryImageList{this};
+	connect(mHistoryImageList, &HistoryImageList::selectedImageIndexChanged, this, &Driver::reloadImage);
 
 	mWatcher = new ImageWatcher{this};
 	connect(mWatcher, &ImageWatcher::imageChanged, this, &Driver::handleImageChanged);
