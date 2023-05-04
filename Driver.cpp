@@ -44,6 +44,7 @@ void Driver::handleImageChanged(const QUrl& imageUrl)
 	historyImage->setTimestamp(QDateTime::currentDateTime());
 	mHistory.push_back(historyImage);
 	mHistoryImageList->addImage(historyImage);
+	mHistoryImageList->setSelectedImageIndex(mHistory.size() - 1);
 	emit historyImageCountChanged(historyImageCount());
 	emit reloadImage();
 }

@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Layouts
 import QtQuick.Controls
 import "Utils.js" as Utils
 
@@ -8,6 +9,7 @@ Window {
     property alias source: image.source
     property alias smooth: image.smooth
     property int resizeTolerance: 12
+    property int selectedImageIndex: 0
     property var loadDatetime: new Date()
     onLoadDatetimeChanged: updateLoadedLabel()
 
@@ -139,15 +141,26 @@ Window {
         }
 
         color: "#AA000000"
-        width: lastUpdated.implicitWidth + 16
-        height: lastUpdated.implicitHeight + 8
+        width: labelArea.implicitWidth + 16
+        height: labelArea.implicitHeight + 8
 
-        Text {
-            id: lastUpdated
+        RowLayout {
+            id: labelArea
             anchors {
                 centerIn: parent
             }
-            color: "white"
+
+            Text {
+                text: `Image#${selectedImageIndex}`
+                font.pointSize: 8
+                color: "white"
+            }
+
+            Text {
+                id: lastUpdated
+                font.pointSize: 8
+                color: "white"
+            }
         }
     }
 }

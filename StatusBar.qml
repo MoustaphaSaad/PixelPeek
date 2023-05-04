@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import "Utils.js" as Utils
 
 Rectangle {
+    property int selectedImageIndex: 0
     property var loadDatetime: new Date()
     onLoadDatetimeChanged: updateLoadedLabel()
 
@@ -38,13 +39,13 @@ Rectangle {
         }
 
         Text {
-            text: "Updated:"
+            text: `Image #${selectedImageIndex}:`
             color: "#464B52"
         }
 
         Text {
             id: lastUpdated
-            text: "XOdsfdsgfsdg"
+            text: "X seconds ago"
             color: "#464B52"
         }
     }

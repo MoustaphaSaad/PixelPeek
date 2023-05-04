@@ -12,7 +12,7 @@ Window {
         console.log("image changed", Driver.watcher.imageUrl)
     }
 
-    width: 800
+    width: 950
     height: 450
     visible: !appBar.pop
     title: qsTr("PixelPeek - v" + Driver.version)
@@ -77,7 +77,7 @@ Window {
 
         HistoryViewer {
             SplitView.fillHeight: true
-            SplitView.minimumWidth: 250
+            SplitView.preferredWidth: 250
             clip: true
         }
     }
@@ -89,6 +89,7 @@ Window {
             right: parent.right
             bottom: parent.bottom
         }
+        selectedImageIndex: Driver.historyImageList.selectedImageIndex
         loadDatetime: Driver.historyImageList.selectedImage.timestamp
     }
 
@@ -102,6 +103,7 @@ Window {
             appBar.pop = false
             hide()
         }
+        selectedImageIndex: Driver.historyImageList.selectedImageIndex
         loadDatetime: Driver.historyImageList.selectedImage.timestamp
     }
 }
