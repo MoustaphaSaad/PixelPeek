@@ -41,14 +41,18 @@ Window {
             imageViewer.restore()
         }
         onPopChanged: {
-            if (pop)
+            if (Driver.historyImageCount > 0)
             {
-                popWindow.show()
-                popWindow.requestFocus()
+                if (pop) {
+                    popWindow.show()
+                    popWindow.requestFocus()
+                } else {
+                    popWindow.hide()
+                }
             }
             else
             {
-                popWindow.hide()
+                appBar.pop = false
             }
         }
     }
@@ -64,14 +68,11 @@ Window {
 
         focus: true
         Component.onCompleted: imageViewerRestoreTimer.start()
-        Keys.onPressed: function(event) {
-            if (event.key == Qt.Key_Left || event.key == Qt.Key_Up)
-            {
+        Keys.onPressed: function (event) {
+            if (event.key == Qt.Key_Left || event.key == Qt.Key_Up) {
                 if (Driver.historyImageList.selectedImageIndex > 0)
                     Driver.historyImageList.selectedImageIndex--
-            }
-            else if (event.key == Qt.Key_Right || event.key == Qt.Key_Down)
-            {
+            } else if (event.key == Qt.Key_Right || event.key == Qt.Key_Down) {
                 if (Driver.historyImageList.selectedImageIndex + 1 < Driver.historyImageCount)
                     Driver.historyImageList.selectedImageIndex++
             }
@@ -109,7 +110,8 @@ Window {
             bottom: parent.bottom
         }
         selectedImageIndex: Driver.historyImageList.selectedImageIndex
-        loadDatetime: Driver.historyImageList.selectedImage.timestamp
+        loadDatetime: Driver.historyImageList.selectedImage ? Driver.historyImageList.selectedImage.timestamp : null
+        messageVisible: Driver.historyImageList.selectedImage != null
     }
 
     PopWindow {
@@ -124,6 +126,6 @@ Window {
             splitArea.focus = true
         }
         selectedImageIndex: Driver.historyImageList.selectedImageIndex
-        loadDatetime: Driver.historyImageList.selectedImage.timestamp
+        loadDatetime: Driver.historyImageList.selectedImage ? Driver.historyImageList.selectedImage.timestamp : null
     }
 }

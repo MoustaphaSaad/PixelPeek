@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import "Utils.js" as Utils
 
 Rectangle {
+    property alias messageVisible: loadedMessage.visible
     property int selectedImageIndex: 0
     property var loadDatetime: new Date()
     onLoadDatetimeChanged: updateLoadedLabel()
@@ -32,6 +33,7 @@ Rectangle {
     }
 
     RowLayout {
+        id: loadedMessage
         anchors {
             verticalCenter: parent.verticalCenter
             left: parent.left
