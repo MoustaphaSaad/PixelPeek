@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Controls
 import PixelPeek
 import "Utils.js" as Utils
 
@@ -8,6 +9,7 @@ ListView {
     model: Driver.historyImageList
     spacing: 2
     currentIndex: Driver.historyImageList.selectedImageIndex
+    ScrollBar.vertical: ScrollBar {}
     delegate: Rectangle {
         width: ListView.view.width
         height: 60
