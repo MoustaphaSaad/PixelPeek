@@ -26,3 +26,13 @@ function timeDifference(current, previous) {
                     elapsed / msPerYear) + ' years ago'
     }
 }
+
+function handleKeyNav(driver, event) {
+    if (event.key == Qt.Key_Left || event.key == Qt.Key_Up) {
+        if (driver.historyImageList.selectedImageIndex > 0)
+            driver.historyImageList.selectedImageIndex--
+    } else if (event.key == Qt.Key_Right || event.key == Qt.Key_Down) {
+        if (driver.historyImageList.selectedImageIndex + 1 < driver.historyImageCount)
+            driver.historyImageList.selectedImageIndex++
+    }
+}

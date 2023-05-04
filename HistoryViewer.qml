@@ -10,6 +10,11 @@ ListView {
     spacing: 2
     currentIndex: Driver.historyImageList.selectedImageIndex
     ScrollBar.vertical: ScrollBar {}
+    focus: true
+    activeFocusOnTab: true
+    Keys.onPressed: function (event) {
+        Utils.handleKeyNav(Driver, event)
+    }
     delegate: Rectangle {
         width: ListView.view.width
         height: 60
@@ -52,7 +57,8 @@ ListView {
                     interval: 1000
                     repeat: true
                     running: true
-                    onTriggered: timestampText.text = Utils.timeDifference(new Date(), timestamp)
+                    onTriggered: timestampText.text = Utils.timeDifference(
+                                     new Date(), timestamp)
                 }
             }
 
@@ -66,6 +72,15 @@ ListView {
                 fill: parent
             }
             onClicked: Driver.historyImageList.selectedImageIndex = index
+        }
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        propagateComposedEvents: true
+        onClicked: function (mouse) {
+            parent.forceActiveFocus()
+            mouse.accepted = false
         }
     }
 }

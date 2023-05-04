@@ -20,7 +20,7 @@ Window {
     }
 
     function requestFocus() {
-        imageBackground.focus = true
+        mouseArea.forceActiveFocus()
     }
 
     width: 320
@@ -41,19 +41,6 @@ Window {
         anchors.fill: parent
         fillMode: Image.Tile
         source: "qrc:/qt/qml/PixelPeek/transparent-tile.png"
-        focus: true
-        Keys.onPressed: function(event) {
-            if (event.key == Qt.Key_Left || event.key == Qt.Key_Up)
-            {
-                if (Driver.historyImageList.selectedImageIndex > 0)
-                    Driver.historyImageList.selectedImageIndex--
-            }
-            else if (event.key == Qt.Key_Right || event.key == Qt.Key_Down)
-            {
-                if (Driver.historyImageList.selectedImageIndex + 1 < Driver.historyImageCount)
-                    Driver.historyImageList.selectedImageIndex++
-            }
-        }
     }
 
     Image {
@@ -95,9 +82,11 @@ Window {
     }
 
     MouseArea {
+        id: mouseArea
         anchors.fill: parent
         hoverEnabled: true
         propagateComposedEvents: true
+        onClicked: forceActiveFocus()
         onDoubleClicked: {
             if (window.visibility === Window.FullScreen)
                 window.showNormal()
@@ -130,6 +119,10 @@ Window {
                 cursorShape = Qt.SizeVerCursor
             else
                 cursorShape = Qt.ArrowCursor
+        }
+
+        Keys.onPressed: function (event) {
+            Utils.handleKeyNav(Driver, event)
         }
     }
 

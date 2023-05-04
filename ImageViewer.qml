@@ -1,4 +1,5 @@
 import QtQuick
+import "Utils.js" as Utils
 
 Rectangle {
     id: workArea
@@ -26,6 +27,7 @@ Rectangle {
     Keys.onSpacePressed: function (event) {
         workArea.restore()
     }
+    Keys.onPressed: function (event) { Utils.handleKeyNav(Driver, event) }
 
     Rectangle {
         id: imageArea
@@ -66,6 +68,7 @@ Rectangle {
         anchors.fill: parent
         acceptedButtons: Qt.LeftButton
         propagateComposedEvents: true
+        onClicked: parent.forceActiveFocus()
         onDoubleClicked: workArea.restore()
         onWheel: function (wheel) {
             if (wheel.modifiers & Qt.ControlModifier) {
