@@ -4,12 +4,20 @@ import PixelPeek
 import "Utils.js" as Utils
 
 ListView {
+    id: list
     model: Driver.historyImageList
     spacing: 2
     delegate: Rectangle {
         width: ListView.view.width
         height: 60
-        color: index % 2 === 0 ? "#D3DCE4" : "#E7ECF0"
+        color: {
+            if (index === list.currentIndex)
+                return "#A0D8B3"
+            else if (index % 2 === 0)
+                return "#D3DCE4"
+            else
+                return "#E7ECF0"
+        }
 
         RowLayout {
             anchors {
@@ -48,6 +56,13 @@ ListView {
             Item {
                 Layout.fillWidth: true
             }
+        }
+
+        MouseArea {
+            anchors {
+                fill: parent
+            }
+            onClicked: list.currentIndex = index
         }
     }
 }
