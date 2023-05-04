@@ -7,6 +7,7 @@ ListView {
     id: list
     model: Driver.historyImageList
     spacing: 2
+    currentIndex: Driver.historyImageList.selectedImageIndex
     delegate: Rectangle {
         width: ListView.view.width
         height: 60
@@ -62,7 +63,7 @@ ListView {
             anchors {
                 fill: parent
             }
-            onClicked: list.currentIndex = index
+            onClicked: Driver.historyImageList.selectedImageIndex = index
         }
     }
 }

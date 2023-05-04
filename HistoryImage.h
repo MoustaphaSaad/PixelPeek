@@ -3,12 +3,14 @@
 #include <QObject>
 #include <QImage>
 #include <QDateTime>
+#include <qqml.h>
 
 class HistoryImage: public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(QImage image READ image WRITE setImage NOTIFY imageChanged)
 	Q_PROPERTY(QDateTime timestamp READ timestamp WRITE setTimestamp NOTIFY timestampChanged)
+	QML_ELEMENT
 public:
 	HistoryImage(QObject* parent = nullptr)
 		: QObject(parent)

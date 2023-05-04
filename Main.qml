@@ -5,13 +5,11 @@ import PixelPeek
 
 Window {
     id: root
-    property var loadDatetime
 
     function reloadImage() {
         imageViewer.source = ""
         imageViewer.source = `image://history/${Driver.historyImageCount - 1}`
         console.log("image changed", Driver.watcher.imageUrl)
-        root.loadDatetime = new Date()
     }
 
     width: 800
@@ -41,7 +39,6 @@ Window {
         onLoadImage: function (path) {
             Driver.watcher.imageUrl = path
             imageViewer.restore()
-            root.loadDatetime = new Date()
         }
         onPopChanged: {
             if (pop)
@@ -92,7 +89,7 @@ Window {
             right: parent.right
             bottom: parent.bottom
         }
-        loadDatetime: root.loadDatetime
+        loadDatetime: Driver.historyImageList.selectedImage.timestamp
     }
 
     PopWindow {
@@ -105,6 +102,6 @@ Window {
             appBar.pop = false
             hide()
         }
-        loadDatetime: root.loadDatetime
+        loadDatetime: Driver.historyImageList.selectedImage.timestamp
     }
 }

@@ -40,6 +40,7 @@ void HistoryImageList::addImage(HistoryImage* image)
 	beginInsertRows(QModelIndex{}, mImages.size(), mImages.size());
 	mImages.push_back(image);
 	endInsertRows();
+	emit selectedImageChanged(selectedImage());
 }
 
 void HistoryImageList::clearImages()
@@ -47,4 +48,15 @@ void HistoryImageList::clearImages()
 	beginResetModel();
 	mImages.clear();
 	endResetModel();
+	emit selectedImageChanged(selectedImage());
 }
+
+void HistoryImageList::setSelectedImageIndex(int value)
+{
+	if (mSelectedImageIndex == value)
+		return;
+	mSelectedImageIndex = value;
+	emit selectedImageIndexChanged(mSelectedImageIndex);
+	emit selectedImageChanged(selectedImage());
+}
+
