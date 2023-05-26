@@ -26,7 +26,7 @@ jobs:
       - name: Build App
         run: cmake --build build --config Release --target appPixelPeek -j
       - name: Deploy Qt Dependencies
-        run: windeployqt --release ./build/bin/Release/PixelPeek.exe --dir ./build/bin/Release/ --qmldir . --pdb --compiler-runtime --core --gui --qml --quick --widgets --printsupport --no-virtualkeyboard --no-translations --no-opengl-sw --no-system-d3d-compiler
+        run: windeployqt --release ./build/bin/Release/PixelPeek.exe --dir ./build/bin/Release/ --qmldir . --pdb --compiler-runtime --core --gui --qml --quick --widgets --printsupport --no-translations --no-opengl-sw --no-system-d3d-compiler
       - name: "Package Zip File"
         shell: bash
         run: 7z a -tzip -r ./PixelPeek-${{github.ref_name}}-${{github.sha}}.zip ./build/bin/Release/* -x!*.exp -x!*.pdb -x!*.lib -x!vc_redist.x64.exe
