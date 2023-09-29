@@ -37,6 +37,19 @@ QImage Driver::getImage(int index) const
 		return QImage{};
 }
 
+void Driver::magnifySelectedImage(float scale, const QRectF& rect)
+{
+	auto image = getImage(mHistoryImageList->selectedImageIndex());
+	mMagnifyImage = image.scaled(image.size() * scale, Qt::KeepAspectRatioByExpanding).copy(rect.toRect());
+	emit reloadMagnifyImage();
+	emit magnifiedColorChanged(magnifiedColor());
+}
+
+QColor Driver::magnifiedColor() const
+{
+	return mMagnifyImage.pixelColor(mMagnifyImage.width() / 2, mMagnifyImage.height() / 2);
+}
+
 void Driver::handleImageChanged(const QUrl& imageUrl)
 {
 	QImage img;

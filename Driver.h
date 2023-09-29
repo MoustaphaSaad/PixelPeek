@@ -18,6 +18,7 @@ class Driver: public QObject
 	Q_PROPERTY(ImageWatcher* watcher READ watcher CONSTANT)
 	Q_PROPERTY(int historyImageCount READ historyImageCount NOTIFY historyImageCountChanged)
 	Q_PROPERTY(HistoryImageList* historyImageList READ historyImageList CONSTANT)
+	Q_PROPERTY(QColor magnifiedColor READ magnifiedColor NOTIFY magnifiedColorChanged)
 	QML_ELEMENT
 	QML_SINGLETON
 public:
@@ -30,9 +31,16 @@ public:
 	HistoryImageList* historyImageList() const { return mHistoryImageList; }
 
 	QImage getImage(int index) const;
+
+	QImage getMagnifyImage() const { return mMagnifyImage; }
+	Q_INVOKABLE void magnifySelectedImage(float scale, const QRectF& rect);
+
+	QColor magnifiedColor() const;
 signals:
 	void reloadImage();
+	void reloadMagnifyImage();
 	void historyImageCountChanged(int historyImageCount);
+	void magnifiedColorChanged(const QColor& color);
 
 private slots:
 	void handleImageChanged(const QUrl& imageUrl);
@@ -45,4 +53,5 @@ private:
 
 	HistoryImageList* mHistoryImageList = nullptr;
 	QVector<HistoryImage*> mHistory;
+	QImage mMagnifyImage;
 };
