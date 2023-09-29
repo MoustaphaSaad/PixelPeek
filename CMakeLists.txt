@@ -58,6 +58,7 @@ qt_add_qml_module(appPixelPeek
 		icons8-pixel.png
 		icons8-restore.png
 		icons8-picture-94.png
+		QML_FILES Magnifier.qml
 )
 
 set_target_properties(appPixelPeek PROPERTIES

@@ -6,6 +6,8 @@ Rectangle {
 
     property alias smooth: image.smooth
     property alias source: image.source
+    property alias imageItem: image
+    readonly property alias imageScale: image.customScale
 
     function clamp(value, min, max) {
         return Math.min(Math.max(value, min), max)

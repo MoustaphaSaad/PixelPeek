@@ -6,6 +6,9 @@ Rectangle {
     property alias messageVisible: loadedMessage.visible
     property int selectedImageIndex: 0
     property var loadDatetime: new Date()
+    property color selectedColor: null
+    property bool showSelectedColor: false
+
     onLoadDatetimeChanged: updateLoadedLabel()
 
     function updateLoadedLabel() {
@@ -49,6 +52,32 @@ Rectangle {
             id: lastUpdated
             text: "X seconds ago"
             color: "#464B52"
+        }
+    }
+
+    RowLayout {
+        id: pixelColor
+        anchors {
+            verticalCenter: parent.verticalCenter
+            right: parent.right
+            margins: 8
+        }
+        visible: showSelectedColor
+
+        Text {
+            id: pixelColortext
+            Layout.alignment: Qt.AlignVCenter
+            text: `(${selectedColor.r.toFixed(3)}, ${selectedColor.g.toFixed(3)}, ${selectedColor.b.toFixed(3)})`
+        }
+
+        Rectangle {
+            id: pixelColorSwatch
+            Layout.alignment: Qt.AlignVCenter
+            color: selectedColor
+            width: 10
+            height: 10
+            border.width: 1
+            border.color: "black"
         }
     }
 }

@@ -13,6 +13,11 @@ Window {
         console.log("image changed", Driver.watcher.imageUrl)
     }
 
+    function reloadMagnifyImage() {
+        magnify.source = ""
+        magnify.source = `image://history/magnify`
+    }
+
     width: 950
     height: 450
     visible: !appBar.pop
@@ -25,9 +30,46 @@ Window {
             root.reloadImage()
         }
 
+        function onReloadMagnifyImage() {
+            root.reloadMagnifyImage()
+        }
+
         function onHistoryImageCountChanged(historyImageCount) {
             console.log(`history image count ${historyImageCount}`)
         }
+
+        function onMagnifiedColorChanged(color) {
+            statusBar.selectedColor = color
+        }
+    }
+
+    MouseArea {
+        id: magnifyMouseArea
+
+        function updateMagnifiedImage() {
+            let imagePos = mapToItem(imageViewer.imageItem, mouseX, mouseY)
+            let rect = Qt.rect(imagePos.x - magnify.sourceSize.width / 2, imagePos.y - magnify.sourceSize.height / 2, magnify.sourceSize.width, magnify.sourceSize.height)
+            Driver.magnifySelectedImage(imageViewer.imageScale, rect)
+        }
+
+        anchors.fill: parent
+        acceptedButtons: Qt.RightButton
+        onPressed: {
+            updateMagnifiedImage()
+            magnify.visible = true
+        }
+        onReleased: magnify.visible = false
+        onPositionChanged: if (pressed) updateMagnifiedImage()
+    }
+
+    Magnifier
+    {
+        id: magnify
+        imageScale: imageViewer.imageScale
+        x: magnifyMouseArea.mouseX - width / 2
+        y: magnifyMouseArea.mouseY - height / 2
+        z: 1
+        visible: false
     }
 
     AppBar {
@@ -100,6 +142,7 @@ Window {
         selectedImageIndex: Driver.historyImageList.selectedImageIndex
         loadDatetime: Driver.historyImageList.selectedImage ? Driver.historyImageList.selectedImage.timestamp : null
         messageVisible: Driver.historyImageList.selectedImage != null
+        showSelectedColor: true
     }
 
     PopWindow {
