@@ -1,1 +1,3 @@
 # PixelPeek
+
+![screenshot](screenshot.png)
